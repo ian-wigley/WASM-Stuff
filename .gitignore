@@ -1,1 +1,3 @@
 target/
+colour_bars/Cargo.lock
+*.wasm
