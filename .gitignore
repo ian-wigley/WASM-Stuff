@@ -2,3 +2,4 @@ target/
 colour_bars/Cargo.lock
 *.wasm
 AssemblyScript/stars/node_modules/
+AssemblyScript/colour_bars/node_modules/
