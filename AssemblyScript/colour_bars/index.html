@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Image Colour Bar - From Assemblyscript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="app.css" type="text/css" />
+    <canvas id="demo-canvas"></canvas>
+</head>
+
+<body>
+
+    <script type="module">
+        import { go, memory } from "./build/release.js";
+        const memoryArray = new Uint8Array(memory.buffer);
+
+        const width = 600;
+        const height = 600;
+        const byteOffset = 0;
+
+        const image = new ImageData(
+            new Uint8ClampedArray(
+                memory.buffer,
+                byteOffset,
+                4 * width * height,
+            ),
+            width,
+        );
+
+        document.body.innerHTML = "<canvas width=600 height=600 id='demo-canvas'>";
+        const canvas = document.getElementById("demo-canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+
+        const render = () => {
+            go();
+            ctx.putImageData(image, 0, 0);
+            requestAnimationFrame(render);
+        };
+
+        render();
+
+    </script>
+</body>
+
+</html>
