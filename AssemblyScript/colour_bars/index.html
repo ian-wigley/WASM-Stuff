@@ -19,17 +19,6 @@
         const width = 600;
         const height = 600;
         const byteOffset = 0;
-
-        const image = new ImageData(
-            new Uint8ClampedArray(
-                memory.buffer,
-                byteOffset,
-                4 * width * height,
-            ),
-            width,
-        );
-
-        document.body.innerHTML = "<canvas width=600 height=600 id='demo-canvas'>";
         const canvas = document.getElementById("demo-canvas");
         canvas.width = width;
         canvas.height = height;
@@ -38,6 +27,16 @@
 
         const render = () => {
             go();
+
+            const image = new ImageData(
+                new Uint8ClampedArray(
+                    memory.buffer,
+                    byteOffset,
+                    4 * width * height,
+                ),
+                width,
+            );
+
             ctx.putImageData(image, 0, 0);
             requestAnimationFrame(render);
         };
