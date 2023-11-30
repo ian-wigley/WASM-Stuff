@@ -11,6 +11,8 @@ greyColourBar.set([
 let startY: u32 = 16;
 const canvasWidth: u32 = 600;
 const numOfBytes: u32 = 4;
+const bites: u32 = 54 * numOfBytes / 2;
+let xx: u32 = 0;
 
 export function go(): void {
   let start: u32 = startY * canvasWidth * numOfBytes;
@@ -30,6 +32,24 @@ export function go(): void {
   else {
     startY = 16;
   }
+
+  let count = 0;
+  let yPosition: u32 = 250 * canvasWidth * numOfBytes;
+  for (x = xx; x < bites + xx; x += numOfBytes) {
+    store<u8>(yPosition + x, greyColourBar[count]);
+    store<u8>(yPosition + x + 1, greyColourBar[count]);
+    store<u8>(yPosition + x + 2, greyColourBar[count]);
+    store<u8>(yPosition + x + 3, 255);
+    count += 1;
+  }
+
+  if (xx < 580 * numOfBytes) {
+    xx += 4;
+  }
+  else {
+    xx = 0;
+  }
+
 }
 
 // npm run asbuild
