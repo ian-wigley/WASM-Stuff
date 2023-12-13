@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WASM Stars</title>
+  <link rel="stylesheet" href="app.css" type="text/css" />
+</head>
+
+<body>
+  <script type="module">
+    import init, { create_stars, render_stars } from './stars.js';
+    async function run() {
+      await init();
+      canvas.width = 800;
+      canvas.height = 800;
+      create_stars(canvas.width, canvas.height, 1000);
+
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        render_stars();
+        requestAnimationFrame(loop);
+      }
+      loop();
+    }
+    run();
+  </script>
+  <canvas id="canvas" width="800" height="800"></canvas>
+  <script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    function draw_stuff(x, y, color, size) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, size, size);
+    }
+  </script>
+</body>
+
+</html>
