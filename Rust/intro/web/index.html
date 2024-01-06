@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="WIDTH=device-WIDTH, initial-scale=1.0">
+    <title>WASM Intro</title>
+    <link rel="stylesheet" href="app.css" type="text/css"/>
+</head>
+
+<body>
+<script type="module">
+    import init, {create_objects, render_objects} from './intro.js';
+
+    let desktopScreenSize = 800;
+    let deviceScreenSize = setWindowWidth();
+
+    async function run() {
+        await init();
+        canvas.WIDTH = deviceScreenSize;
+        canvas.HEIGHT = deviceScreenSize;
+        create_objects(deviceScreenSize, deviceScreenSize, 1000);
+        let theta = 0;
+
+        function loop() {
+            ctx.clearRect(0, 0, canvas.WIDTH, canvas.HEIGHT);
+            theta += 0.001;
+            ctx.translate(400, 400);
+            ctx.rotate(theta);
+            ctx.drawImage(nebula, -600, -600, 1600, 1200);
+            ctx.rotate(-theta);
+            ctx.translate(-400, -400);
+
+            render_objects();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    }
+    function onWindowResize() {
+        setWindowWidth();
+        setWindowHeight();
+    }
+    function setWindowWidth() {
+        if (innerWidth < desktopScreenSize) {
+            canvas.width = innerWidth;
+            return innerWidth;
+        } else {
+            canvas.width = desktopScreenSize;
+            return desktopScreenSize;
+        }
+    }
+    function setWindowHeight() {
+        if (canvas.height < desktopScreenSize) {
+            canvas.height = innerHeight;
+            return innerHeight;
+        } else {
+            canvas.height = desktopScreenSize;
+            return desktopScreenSize;
+        }
+    }
+    window.addEventListener('resize', onWindowResize, false);
+    run();
+</script>
+<canvas id="canvas" WIDTH="800" HEIGHT="800"></canvas>
+<img id="nebula" src="graphics/nebula.png" style="display: none;" alt="nebula"/>
+<img id="letters" src="graphics/bitmapFont.png" style="display: none;" alt="letters"/>
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    let nebula = document.getElementById("nebula");
+    let letters = document.getElementById("letters");
+
+    function draw_stars(x, y, color, size) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, size, size);
+    }
+
+    function draw_letters(x, y, screen_position_x, screen_position_y) {
+        ctx.drawImage(letters, x, y, 64, 64, screen_position_x, screen_position_y, 32, 32);
+    }
+
+</script>
+</body>
+
+</html>
