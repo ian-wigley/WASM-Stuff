@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+# set -euo pipefail
 
 TARGET=wasm32-unknown-unknown
 BINARY=target/$TARGET/release/colour_bars.wasm
