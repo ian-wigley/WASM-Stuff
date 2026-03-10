@@ -7,3 +7,4 @@ Rust/colour_bars/.idea/
 Rust/blob/.idea/
 Rust/intro/.idea/
 Rust/colour_bars/.idea/
+*.lock
