@@ -8,3 +8,4 @@ Rust/blob/.idea/
 Rust/intro/.idea/
 Rust/colour_bars/.idea/
 *.lock
+AssemblyScript/colour_bars/package-lock.json
