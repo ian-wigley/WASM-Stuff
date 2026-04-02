@@ -79,10 +79,6 @@ export function go(): void {
 //  --debug \
 //  --sourceMap
 
-// npx serve
-// Open http://localhost:3000 in Chrome
-
-
 // npm run asbuild
 // asc assembly/index.ts --target debug --sourceMap
 // npx serve
@@ -90,3 +86,13 @@ export function go(): void {
 
 // npm run asbuild:debug
 // npm run start
+
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+//
+// npx serve
+// Open http://localhost:3000 in Chrome
+//
+////////////////////////////////////////////
+////////////////////////////////////////////
